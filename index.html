@@ -13,155 +13,142 @@
             font-family: 'Inter', sans-serif;
             background-color: #eef2ff; /* Fondo muy suave (Indigo-50) */
         }
+        /* Estilos para asegurar que los inputs se vean bien en foco */
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5); /* Sombra de foco índigo */
+        }
     </style>
 </head>
 <body class="p-4 md:p-8 min-h-screen flex items-center justify-center">
 
-    <div class="w-full max-w-xl bg-white shadow-2xl rounded-3xl p-6 md:p-10 border-t-8 border-indigo-600">
-        
-        <!-- Encabezado -->
-        <header class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-indigo-800 mb-2">
-                Paso 1: Completa el Cuestionario
-            </h1>
-            <p class="text-gray-600">
-                Responde brevemente y serás redirigido automáticamente a la página de pago.
-            </p>
-        </header>
+<!-- INICIO DEL FORMULARIO DE CAPTURA DE LEADS Y QUIZ NETLIFY (Adaptado) -->
+<form
+  name="quiz-paternidad"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  class="space-y-6 bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-lg border-t-4 border-indigo-500"
+>
+    <!-- Campo oculto requerido por Netlify para evitar bots (Honeypot) -->
+    <p class="hidden">
+        <label>No me llenes: <input name="bot-field" /></label>
+    </p>
+    
+    <!-- Campo oculto OBLIGATORIO: Nombre del formulario para Netlify -->
+    <input type="hidden" name="form-name" value="quiz-paternidad" />
+    
+    <!-- 
+        Campo oculto OBLIGATORIO: Redirección post-envío.
+        La URL se ha limpiado de la sintaxis Markdown ([...](...)).
+    -->
+    <input 
+        type="hidden" 
+        name="redirect" 
+        value="https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr"
+    />
 
-        <!--
-            CONFIGURACIÓN CRUCIAL NETLIFY
-            - Se omite el atributo 'action'.
-            - Se usan 'name', 'data-netlify', y 'netlify' para que Netlify lo reconozca.
-            - El campo 'redirect' maneja la URL externa.
-        -->
-        <form 
-            name="quiz-paternidad" 
-            method="POST" 
-            data-netlify="true" 
-            netlify 
-            class="space-y-6"
-        >
-            <!-- Campo Oculto 1: Nombre del Formulario (MANDATORIO para Netlify) -->
-            <input type="hidden" name="form-name" value="quiz-paternidad" />
-            
-            <!-- 
-                Campo Oculto 2: Redirección (MANDATORIO para el Flujo)
-                URL de destino: https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr
-            -->
+    <h2 class="text-2xl font-bold text-gray-800 text-center">Descubre tu Estilo de Paternidad</h2>
+    <p class="text-sm text-gray-500 text-center">Responde 3 preguntas y accede a la página de inscripción.</p>
+
+    <!-- 1. CAMPOS DE LEADS -->
+    <div class="space-y-4">
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
             <input 
-                type="hidden" 
-                name="redirect" 
-                value="https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr"
+                type="text" 
+                id="name" 
+                name="name" 
+                placeholder="Tu nombre" 
+                required 
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             />
-
-            <!-- SECCIÓN 1: CAPTURA DE LEADS -->
-            <div class="space-y-4 border-b pb-6 border-indigo-200">
-                <h2 class="text-xl font-semibold text-indigo-700">Tus Datos de Contacto</h2>
-                
-                <!-- Nombre -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                    <input type="text" id="name" name="name" required
-                           placeholder="Tu nombre completo"
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
-                </div>
-                
-                <!-- Correo Electrónico -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" required
-                           placeholder="ejemplo@correo.com"
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
-                </div>
-            </div>
-
-            <!-- SECCIÓN 2: CUESTIONARIO -->
-            <h2 class="text-xl font-semibold text-indigo-700 pt-4">Cuestionario Rápido</h2>
-
-            <!-- PREGUNTA 1 (Radio): Reacción a Rabieta -->
-            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">
-                <p class="font-medium text-gray-800 mb-3">1. ¿Cómo reaccionas cuando tu hijo/a tiene una rabieta o está frustrado?</p>
-                <div class="space-y-2 text-sm">
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="radio" name="q1_emociones" value="Razón lógica (A)" required
-                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                        <span class="text-gray-700">Intento razonar o calmarlo inmediatamente con lógica (A)</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="radio" name="q1_emociones" value="Grito y frustración (B)" required
-                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                        <span class="text-gray-700">Suelo gritar o me siento frustrado/a (B)</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="radio" name="q1_emociones" value="Validación emocional (C)" required
-                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                        <span class="text-gray-700">Valido su emoción antes de buscar soluciones (C)</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- PREGUNTA 2 (Radio): Tiempo de Calidad -->
-            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">
-                <p class="font-medium text-gray-800 mb-3">2. ¿Con qué frecuencia pasas tiempo de calidad individual con tu hijo/a?</p>
-                <div class="space-y-2 text-sm">
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="radio" name="q2_tiempo_calidad" value="Diariamente (A)" required
-                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                        <span class="text-gray-700">Diariamente (A)</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="radio" name="q2_tiempo_calidad" value="Semanalmente (B)" required
-                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                        <span class="text-gray-700">Semanalmente (B)</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="radio" name="q2_tiempo_calidad" value="Rara vez (C)" required
-                               class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                        <span class="text-gray-700">Rara vez (C)</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- PREGUNTA 3 (Checkbox): Modelo a Seguir -->
-            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">
-                <p class="font-medium text-gray-800 mb-3">3. ¿Qué acciones tomas consistentemente para ser un modelo a seguir positivo? (Marca todas las que apliquen)</p>
-                <div class="space-y-2 text-sm">
-                    <!-- Es crucial usar el name="q3_modelo_a_seguir[]" para capturar múltiples valores -->
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Pedir disculpas"
-                               class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                        <span class="text-gray-700">Pedir disculpas cuando me equivoco</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Manejo de estrés"
-                               class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                        <span class="text-gray-700">Manejar mi propio estrés de forma saludable</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Cumplimiento de promesas"
-                               class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                        <span class="text-gray-700">Cumplimiento de promesas</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Evitar conflicto"
-                               class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                        <span class="text-gray-700">Evitar conflicto</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Botón de Envío -->
-            <div class="pt-6">
-                <button type="submit" 
-                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl 
-                                transition duration-300 ease-in-out transform hover:scale-[1.01] shadow-lg shadow-indigo-300/50">
-                    Enviar y Acceder a la Inscripción Ahora
-                </button>
-            </div>
-
-        </form>
+        </div>
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="ejemplo@correo.com" 
+                required 
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            />
+        </div>
     </div>
+
+    <!-- 2. PREGUNTA 1: CONEXIÓN Y REACTIVIDAD -->
+    <fieldset class="pt-4 border-t border-gray-200">
+        <legend class="text-base font-semibold text-gray-900 mb-2">1. Cuando tu hijo/a tiene una rabieta fuerte o está muy frustrado, ¿cuál es tu reacción más común?</legend>
+        <div class="space-y-2">
+            <div class="flex items-start">
+                <input id="q1_a" name="q1_reaccion" type="radio" value="Reaccion_A" required class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                <label for="q1_a" class="ml-3 text-sm text-gray-700">Reacciono gritando o castigando para que se detenga de inmediato.</label>
+            </div>
+            <div class="flex items-start">
+                <input id="q1_b" name="q1_reaccion" type="radio" value="Reaccion_B" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                <label for="q1_b" class="ml-3 text-sm text-gray-700">Intento razonar o distraerlo, pero termino frustrado/a esperando que se le pase.</label>
+            </div>
+            <div class="flex items-start">
+                <input id="q1_c" name="q1_reaccion" type="radio" value="Reaccion_C" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                <label for="q1_c" class="ml-3 text-sm text-gray-700">Respiro, valido su emoción ("Entiendo que estás enojado") y luego establezco el límite.</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- 3. PREGUNTA 2: CALIDAD DE LA CONEXIÓN -->
+    <fieldset class="pt-4 border-t border-gray-200">
+        <legend class="text-base font-semibold text-gray-900 mb-2">2. ¿Qué tan a menudo sientes que estás en modo 'presencia plena' (sin prisa ni celular) con tu hijo/a?</legend>
+        <div class="space-y-2">
+            <div class="flex items-start">
+                <input id="q2_a" name="q2_presencia_plena" type="radio" value="Conexion_A" required class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                <label for="q2_a" class="ml-3 text-sm text-gray-700">Rara vez; siento que estamos en modo 'supervivencia' o solo dando órdenes.</label>
+            </div>
+            <div class="flex items-start">
+                <input id="q2_b" name="q2_presencia_plena" type="radio" value="Conexion_B" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                <label for="q2_b" class="ml-3 text-sm text-gray-700">Hacemos cosas juntos, pero mi mente a menudo está en las tareas pendientes.</label>
+            </div>
+            <div class="flex items-start">
+                <input id="q2_c" name="q2_presencia_plena" type="radio" value="Conexion_C" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                <label for="q2_c" class="ml-3 text-sm text-gray-700">Diariamente tenemos rituales de conexión genuina donde el mundo exterior desaparece.</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- 4. PREGUNTA 3: EL MODELO DEL ADULTO (CHECKBOX) -->
+    <fieldset class="pt-4 border-t border-gray-200">
+        <legend class="text-base font-semibold text-gray-900 mb-2">3. ¿Cuál de estas afirmaciones describe mejor cómo manejas *tu propia frustración o estrés* frente a tu hijo/a? (Marca todas las que apliquen)</legend>
+        <div class="space-y-2">
+            <!-- Nota: Usamos [] en el nombre para que Netlify capture múltiples valores como un array. -->
+            <div class="flex items-start">
+                <input id="q3_a" name="q3_modelaje[]" type="checkbox" value="Modelaje_A" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <label for="q3_a" class="ml-3 text-sm text-gray-700">Muestro mi enfado sin filtro; necesitan ver la realidad.</label>
+            </div>
+            <div class="flex items-start">
+                <input id="q3_b" name="q3_modelaje[]" type="checkbox" value="Modelaje_B" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <label for="q3_b" class="ml-3 text-sm text-gray-700">Me retiro para calmarme y luego vuelvo a hablar de lo que sentí.</label>
+            </div>
+            <div class="flex items-start">
+                <input id="q3_c" name="q3_modelaje[]" type="checkbox" value="Modelaje_C" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <label for="q3_c" class="ml-3 text-sm text-gray-700">Pido disculpas de forma auténtica cuando me doy cuenta de que reaccioné mal.</label>
+            </div>
+            <div class="flex items-start">
+                <input id="q3_d" name="q3_modelaje[]" type="checkbox" value="Modelaje_D" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <label for="q3_d" class="ml-3 text-sm text-gray-700">Trato de ocultar o reprimir mis emociones para no preocuparlos.</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- 5. BOTÓN DE ENVÍO -->
+    <button 
+        type="submit" 
+        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+    >
+        ¡Descubre el Camino y Accede al Taller!
+    </button>
+</form>
+<!-- FIN DEL FORMULARIO DE CAPTURA DE LEADS Y QUIZ NETLIFY -->
 
 </body>
 </html>
