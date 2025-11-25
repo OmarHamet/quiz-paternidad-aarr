@@ -3,285 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Paternidad - AARR</title>
-    <!-- Carga de Tailwind CSS para un diseño limpio y responsivo -->
+    <title>Quiz de Estrategia Digital</title>
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Estilos personalizados para la fuente y el fondo */
+        /* Configuración de fuente principal y estilos base */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f7f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #f7f9fc;
         }
-        .quiz-container {
-            max-width: 500px;
+        .container {
+            max-width: 800px;
         }
-        .progress-bar {
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 9999px;
-            overflow: hidden;
+        .quiz-section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
         }
-        .progress-indicator {
-            height: 100%;
-            background-color: #3b82f6; /* Blue 500 */
-            transition: width 0.3s ease-in-out;
+        /* Estilos para las opciones de radio/checkbox */
+        .quiz-option input[type="radio"],
+        .quiz-option input[type="checkbox"] {
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #4f46e5; /* Color morado principal */
         }
-        /* Estilos para ocultar preguntas y manejar transiciones */
-        .question-step {
-            display: none;
-            animation: fadeIn 0.5s ease-out;
+        .quiz-option {
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .form-group input[type="radio"]:checked + label {
-            background-color: #3b82f6; /* Blue 500 */
-            color: white;
-            border-color: #3b82f6;
+        .quiz-option:hover {
+            background-color: #f3f4f6;
         }
     </style>
 </head>
 <body>
 
-    <div id="app" class="quiz-container bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full mx-4">
-        
-        <div class="flex items-center space-x-3 mb-6">
-            <div class="progress-bar flex-grow">
-                <div id="progressIndicator" class="progress-indicator" style="width: 0%;"></div>
-            </div>
-            <span id="progressText" class="text-sm font-medium text-gray-600">0/3</span>
-        </div>
-
-        <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Quiz de Paternidad AARR</h1>
-        <p class="text-sm text-gray-500 mb-6 text-center">¡Descubre tu estilo de paternidad en 3 sencillas preguntas!</p>
-
-        <!-- Formulario del Quiz -->
-        <form id="quizForm">
+    <div class="min-h-screen flex flex-col items-center py-12 px-4">
+        <div class="container w-full">
             
-            <!-- Paso 1: Pregunta de Conciencia (Awareness) -->
-            <div id="step-1" class="question-step active">
-                <label class="block text-lg font-semibold text-gray-700 mb-4">1. ¿Cómo reaccionas típicamente cuando tu hijo/a comete un error?</label>
-                <div class="space-y-4">
-                    <div class="form-group">
-                        <input type="radio" id="q1a" name="question1" value="A" class="hidden">
-                        <label for="q1a" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            A. Le explico inmediatamente por qué estuvo mal y le muestro cómo corregirlo.
+            <header class="text-center mb-12">
+                <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Evalúa tu Estrategia Digital</h1>
+                <p class="text-xl text-gray-500">Descubre tus puntos fuertes y qué áreas necesitas reforzar.</p>
+            </header>
+
+            <div id="quiz-container" class="quiz-section">
+                
+                <!-- 
+                    *** IMPORTANTE PARA NETLIFY FORMS ***
+                    1. Atributo 'name="quiz-form"': Este será el nombre de tu base de datos en Netlify.
+                    2. Atributo 'data-netlify="true"': Indica a Netlify que debe capturar los datos.
+                    3. Método 'POST': Obligatorio para enviar la información a Netlify.
+                -->
+                <form 
+                    name="quiz-estrategia" 
+                    method="POST" 
+                    data-netlify="true" 
+                    netlify-honeypot="bot-field"
+                    onsubmit="return validateAndSubmit(event)" 
+                    id="quizForm"
+                    class="space-y-10"
+                >
+                    <!-- Campo oculto requerido por Netlify para evitar spam -->
+                    <input type="hidden" name="form-name" value="quiz-estrategia" />
+                    <div hidden>
+                        <label>No me llenes: <input name="bot-field" /></label>
+                    </div>
+
+                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (CRUCIAL PARA LA ESTRATEGIA) -->
+                    <div class="p-6 bg-indigo-50 border border-indigo-200 rounded-xl shadow-inner">
+                        <h2 class="text-2xl font-semibold text-indigo-800 mb-4">Paso 1: Tu Información</h2>
+                        <p class="text-indigo-700 mb-4">Te enviaremos los resultados detallados y un recurso exclusivo basado en tu puntuación.</p>
+                        
+                        <!-- Campo Nombre -->
+                        <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                            <!-- El atributo 'name="name"' es clave para que el dato se guarde -->
+                            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="Tu nombre">
+                        </div>
+
+                        <!-- Campo Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                            <!-- El atributo 'name="email"' es clave para que el dato se guarde -->
+                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="tu.correo@ejemplo.com">
+                        </div>
+                    </div>
+
+                    <!-- PREGUNTA 1: Definición de Buyer Persona -->
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-gray-800">1. ¿Qué tan definido está tu Buyer Persona (cliente ideal)?</p>
+                        <!-- Todas las opciones tienen el mismo 'name="q1_buyer_persona"' -->
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="radio" name="q1_buyer_persona" value="Muy definido" required>
+                            <span class="ml-3 text-gray-700">A. Muy definido. Tengo documentos detallados de sus metas y desafíos.</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="radio" name="q1_buyer_persona" value="Definición básica">
+                            <span class="ml-3 text-gray-700">B. Definición básica. Sé quién es, pero no sus motivaciones profundas.</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="radio" name="q1_buyer_persona" value="No definido">
+                            <span class="ml-3 text-gray-700">C. No definido. Simplemente apunto a "todos los interesados".</span>
                         </label>
                     </div>
-                    <div class="form-group">
-                        <input type="radio" id="q1b" name="question1" value="B" class="hidden">
-                        <label for="q1b" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            B. Le pregunto cómo se siente al respecto y qué cree que debería hacer diferente la próxima vez.
+
+                    <!-- PREGUNTA 2: Presencia en Redes Sociales -->
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-gray-800">2. ¿Cuál es el objetivo principal de tu presencia en Redes Sociales?</p>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="radio" name="q2_rrss_objetivo" value="Generar ventas directas" required>
+                            <span class="ml-3 text-gray-700">A. Generar ventas directas e inmediatas.</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="radio" name="q2_rrss_objetivo" value="Construir comunidad y marca">
+                            <span class="ml-3 text-gray-700">B. Construir comunidad, fortalecer la marca y generar tráfico al sitio web.</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="radio" name="q2_rrss_objetivo" value="Solo postear novedades">
+                            <span class="ml-3 text-gray-700">C. Solo postear novedades o contenido de relleno cuando me acuerdo.</span>
                         </label>
                     </div>
-                    <div class="form-group">
-                        <input type="radio" id="q1c" name="question1" value="C" class="hidden">
-                        <label for="q1c" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            C. Ignoro el error para evitar hacerlo sentir mal.
+
+                    <!-- PREGUNTA 3: Medición de Resultados (Multi-opción) -->
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-gray-800">3. ¿Qué métricas mides de forma consistente? <span class="text-sm font-normal text-gray-500">(Marca todas las que apliquen)</span></p>
+                        <!-- Aquí usamos Checkbox con el mismo 'name="q3_metricas"' pero con la notación de array '[]' -->
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="checkbox" name="q3_metricas[]" value="Tasa de Conversión">
+                            <span class="ml-3 text-gray-700">A. Tasa de Conversión (Leads, Compras, etc.)</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="checkbox" name="q3_metricas[]" value="Costo de Adquisición (CAC)">
+                            <span class="ml-3 text-gray-700">B. Costo de Adquisición de Cliente (CAC)</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="checkbox" name="q3_metricas[]" value="Tráfico y Alcance">
+                            <span class="ml-3 text-gray-700">C. Tráfico web o Alcance en Redes Sociales.</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
+                            <input type="checkbox" name="q3_metricas[]" value="Ninguna">
+                            <span class="ml-3 text-gray-700">D. Ninguna. Solo veo la cantidad de "me gusta".</span>
                         </label>
                     </div>
-                </div>
+                    
+                    <!-- Botón de Envío -->
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition duration-150 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+                        Ver Mis Resultados y Recibir el Reporte
+                    </button>
+                    
+                    <!-- Contenedor para mensajes de validación/éxito -->
+                    <div id="message-container" class="mt-4 p-4 text-center hidden rounded-lg" role="alert"></div>
+
+                </form>
+
             </div>
-
-            <!-- Paso 2: Pregunta de Relevancia (Relevance) -->
-            <div id="step-2" class="question-step">
-                <label class="block text-lg font-semibold text-gray-700 mb-4">2. ¿Qué tan importante es para ti que tu hijo/a te vea como un modelo a seguir, en lugar de solo como una autoridad?</label>
-                <div class="space-y-4">
-                    <div class="form-group">
-                        <input type="radio" id="q2a" name="question2" value="A" class="hidden">
-                        <label for="q2a" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            A. Muy importante, demuestro activamente los valores que quiero que tenga.
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="radio" id="q2b" name="question2" value="B" class="hidden">
-                        <label for="q2b" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            B. Algo importante, aunque creo que las reglas claras son más efectivas.
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="radio" id="q2c" name="question2" value="C" class="hidden">
-                        <label for="q2c" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            C. Poco importante, mi rol es solo establecer la disciplina.
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Paso 3: Pregunta de Acción (Action) -->
-            <div id="step-3" class="question-step">
-                <label class="block text-lg font-semibold text-gray-700 mb-4">3. ¿Con qué frecuencia buscas activamente nueva información o estrategias sobre crianza y desarrollo infantil?</label>
-                <div class="space-y-4">
-                    <div class="form-group">
-                        <input type="radio" id="q3a" name="question3" value="A" class="hidden">
-                        <label for="q3a" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            A. Constantemente (leo libros, blogs o asisto a talleres).
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="radio" id="q3b" name="question3" value="B" class="hidden">
-                        <label for="q3b" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            B. Ocasionalmente, si surge un problema específico.
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="radio" id="q3c" name="question3" value="C" class="hidden">
-                        <label for="q3c" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
-                            C. Casi nunca, confío en mi instinto y en cómo me criaron.
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Paso 4: Captura de Correo (Resultados) -->
-            <div id="step-4" class="question-step">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">¡Casi Listo!</h2>
-                <p class="text-base text-gray-600 mb-6 text-center">Para recibir tu resultado personalizado y acceso a la guía de Paternidad, introduce tu correo electrónico:</p>
-
-                <div class="space-y-4">
-                    <input type="email" id="emailInput" placeholder="tu.correo@ejemplo.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                    <p id="emailError" class="text-red-500 text-sm hidden">Por favor, introduce un correo electrónico válido.</p>
-                </div>
-            </div>
-
-            <!-- Botones de Navegación -->
-            <div class="mt-8 flex justify-between">
-                <button type="button" id="prevBtn" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-semibold transition duration-200 hover:bg-gray-300 disabled:opacity-50" disabled>
-                    Anterior
-                </button>
-                <button type="button" id="nextBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-200 hover:bg-blue-700 disabled:opacity-50">
-                    Siguiente
-                </button>
-            </div>
-        </form>
-
+        </div>
     </div>
 
+    <!-- Script de JavaScript para la validación (calificación y mensaje) -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const quizForm = document.getElementById('quizForm');
-            const steps = document.querySelectorAll('.question-step');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const progressIndicator = document.getElementById('progressIndicator');
-            const progressText = document.getElementById('progressText');
-            const emailInput = document.getElementById('emailInput');
-            const emailError = document.getElementById('emailError');
-
-            let currentStep = 0;
-            const totalSteps = steps.length;
+        // Función para validar el formulario y simular la calificación
+        function validateAndSubmit(event) {
+            const form = document.getElementById('quizForm');
+            const messageContainer = document.getElementById('message-container');
+            const name = document.getElementById('name').value;
             
-            // 🚨🚨 CRÍTICO: Reemplaza esta URL con la URL de tu Google Site 🚨🚨
-            const REDIRECT_URL = "https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr"; 
+            // 1. Lógica de Calificación (Simulada por ahora)
+            // Esto es lo MÍNIMO para darle una respuesta al usuario, mientras tú recolectas los datos
+            const score = calculateScore(form);
+            const totalQuestions = 3; 
 
-            // Función para actualizar la barra de progreso
-            const updateProgress = () => {
-                const percent = (currentStep / (totalSteps - 1)) * 100;
-                progressIndicator.style.width = `${percent}%`;
-                progressText.textContent = `${Math.min(currentStep, totalSteps - 1)}/${totalSteps - 1}`;
-            };
+            // 2. Mensaje de Éxito al Usuario
+            messageContainer.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'border-red-400');
+            messageContainer.classList.add('bg-green-100', 'text-green-700', 'border-green-400', 'border');
+            
+            // Mensaje que verán al instante. El resultado detallado lo recibirán por correo (estrategia)
+            messageContainer.innerHTML = `
+                <p class="font-bold">¡Excelente, ${name}!</p>
+                <p>Tu información y respuestas han sido enviadas. ¡Tu puntaje provisional es ${score}/${totalQuestions}!</p>
+                <p><strong>Revisa tu correo:</strong> En unos minutos recibirás tu análisis completo y personalizado. ¡Gracias por participar!</p>
+            `;
 
-            // Función para mostrar el paso actual
-            const showStep = (stepIndex) => {
-                steps.forEach((step, index) => {
-                    step.style.display = index === stepIndex ? 'block' : 'none';
-                });
+            // Ocultar el formulario y mostrar solo el mensaje
+            form.style.display = 'none';
 
-                // Control de botones
-                prevBtn.disabled = stepIndex === 0;
-                nextBtn.textContent = stepIndex === totalSteps - 1 ? 'Enviar y Ver Resultado' : 'Siguiente';
-                updateNextButtonState();
-                
-                updateProgress();
-            };
+            // 3. Permite que Netlify capture el formulario
+            // Como retornamos 'true', el formulario se envía al servicio de Netlify.
+            // Netlify automáticamente maneja la redirección/mensaje en el backend.
+            // Para ver los datos, debes ir a tu panel de Netlify.
 
-            // Función para actualizar el estado del botón Siguiente/Enviar
-            const updateNextButtonState = () => {
-                const currentQuestionName = `question${currentStep + 1}`;
-                const isOptionSelected = document.querySelector(`input[name="${currentQuestionName}"]:checked`);
-                
-                if (currentStep < totalSteps - 1) { // Pasos de Pregunta
-                    if (isOptionSelected) {
-                        nextBtn.disabled = false;
-                    } else {
-                        nextBtn.disabled = true;
-                    }
-                } else { // Paso de Email
-                    nextBtn.disabled = !emailInput.value || !emailInput.checkValidity();
-                }
-            };
+            // Retornamos true para que se envíe el formulario a Netlify
+            return true;
+        }
 
-            // Event listener para las opciones de respuesta (habilita el botón Siguiente)
-            quizForm.addEventListener('change', (e) => {
-                if (e.target.type === 'radio') {
-                    updateNextButtonState();
-                }
-            });
+        // Función de ejemplo para CALCULAR el puntaje (TÚ DEBES DEFINIR LA LÓGICA DE LAS RESPUESTAS CORRECTAS)
+        function calculateScore(form) {
+            let score = 0;
+            
+            // Ejemplo de lógica simple: Asignar 1 punto a la respuesta B de la pregunta 1 y 2.
+            
+            // P1: Si escoge 'Muy definido' (A) o 'Definición básica' (B), asumimos 1 punto.
+            const q1 = form.elements['q1_buyer_persona'].value;
+            if (q1 === 'Muy definido' || q1 === 'Definición básica') {
+                score += 1;
+            }
 
-            // Event listener para la validación del correo (habilita el botón Enviar)
-            emailInput.addEventListener('input', () => {
-                if (emailInput.checkValidity()) {
-                    emailError.classList.add('hidden');
-                    nextBtn.disabled = false;
-                } else {
-                    emailError.classList.remove('hidden');
-                    nextBtn.disabled = true;
+            // P2: Si escoge 'Construir comunidad y marca' (B), asumimos 1 punto.
+            const q2 = form.elements['q2_rrss_objetivo'].value;
+            if (q2 === 'Construir comunidad y marca') {
+                score += 1;
+            }
+
+            // P3: Si escoge 'Tasa de Conversión' y 'Costo de Adquisición', asumimos 1 punto.
+            // Esto es más complejo en checkboxes, solo revisamos si eligió la primera opción A
+            const q3_options = form.querySelectorAll('input[name="q3_metricas[]"]:checked');
+            let q3_scores = 0;
+            q3_options.forEach(option => {
+                if (option.value === 'Tasa de Conversión' || option.value === 'Costo de Adquisición (CAC)') {
+                    q3_scores += 0.5;
                 }
             });
+            if (q3_scores > 0) {
+                 score += 1; // Le damos 1 punto si mide al menos las dos métricas clave.
+            }
+            
+            return score;
+        }
 
-            // Lógica del botón Siguiente/Enviar
-            nextBtn.addEventListener('click', () => {
-                if (currentStep < totalSteps - 1) {
-                    const currentQuestionName = `question${currentStep + 1}`;
-                    const isOptionSelected = document.querySelector(`input[name="${currentQuestionName}"]:checked`);
-                    
-                    if (isOptionSelected) {
-                        currentStep++;
-                        showStep(currentStep);
-                    }
-                } else {
-                    // Lógica de Envío/Finalización
-                    if (emailInput.checkValidity()) {
-                        emailError.classList.add('hidden');
-                        
-                        const email = emailInput.value;
-                        
-                        // 1. Recolección de Respuestas (opcional, para enviar al servidor)
-                        const answers = {
-                            q1: quizForm.elements.question1.value,
-                            q2: quizForm.elements.question2.value,
-                            q3: quizForm.elements.question3.value,
-                            email: email
-                        };
-
-                        // Aquí se agregaría la lógica para enviar 'answers' y 'email' a tu herramienta de marketing
-                        
-                        // 2. Redirección final
-                        window.location.href = REDIRECT_URL;
-                        
-                    } else {
-                        emailError.classList.remove('hidden');
-                    }
-                }
-            });
-
-            // Lógica del botón Anterior
-            prevBtn.addEventListener('click', () => {
-                if (currentStep > 0) {
-                    currentStep--;
-                    showStep(currentStep);
-                }
-            });
-
-            // Inicializar el quiz en el primer paso
-            showStep(currentStep);
-        });
     </script>
 </body>
 </html>
