@@ -4,29 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluación de la Paternidad Consciente</title>
-    <!-- Carga de Tailwind CSS -->
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Configuración de fuente principal y estilos base */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f7f9fc;
         }
-        .container { max-width: 800px; }
+        .container {
+            max-width: 800px;
+        }
         .quiz-section {
             background-color: white;
             padding: 2.5rem;
             border-radius: 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
         }
+        /* Estilos para las opciones de radio/checkbox */
         .quiz-option input[type="radio"],
         .quiz-option input[type="checkbox"] {
             margin-right: 0.75rem;
             width: 1.25rem;
             height: 1.25rem;
+            /* Color de acento verde */
             accent-color: #059669; 
         }
-        .quiz-option:hover { background-color: #f3f4f6; }
+        .quiz-option {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #f3f4f6;
+        }
     </style>
 </head>
 <body>
@@ -42,42 +53,31 @@
             <div id="quiz-container" class="quiz-section">
                 
                 <!-- 
-                    CONFIGURACIÓN DE NETLIFY FORMS (RESTABLECIDA)
-                    IMPORTANTE: Ahora redirige a la URL INTERNA /success
+                    FORMULARIO EN ESTADO SEGURO:
+                    Contiene el mensaje de alerta para evitar errores de envío de Netlify,
+                    pero mantiene toda la estructura visual y de campos (incluyendo Nombre y Correo).
                 -->
-                <form 
-                    name="quiz-paternidad" 
-                    method="POST" 
-                    data-netlify="true" 
-                    netlify-honeypot="bot-field"
-                    id="quizForm"
-                    class="space-y-10"
-                >
-                    <!-- Campos ocultos de Netlify -->
-                    <input type="hidden" name="form-name" value="quiz-paternidad" />
-                    <div hidden>
-                        <label>No me llenes: <input name="bot-field" /></label>
-                    </div>
+                <form id="quizForm" class="space-y-10" onsubmit="alert('Para activar el envío, por favor, añade los atributos de Netlify Forms al elemento <form>.'); return false;">
 
-                    <!-- REDIRECCIÓN INTERNA a /success (Netlify lo procesará) -->
-                    <input type="hidden" name="redirect" value="/success" />
-
-
-                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO -->
+                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (Mantenida) -->
                     <div class="p-6 bg-green-50 border border-green-200 rounded-xl shadow-inner">
                         <h2 class="text-2xl font-semibold text-green-800 mb-4">Paso 1: Tu Información</h2>
+                        <p class="text-green-700 mb-4">Te enviaremos los resultados detallados y una guía personalizada de crianza basada en tus respuestas.</p>
+                        
+                        <!-- Campo Nombre -->
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
                             <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 transition duration-150" placeholder="Tu nombre">
                         </div>
 
+                        <!-- Campo Email -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
                             <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 transition duration-150" placeholder="tu.correo@ejemplo.com">
                         </div>
                     </div>
 
-                    <!-- PREGUNTAS (Sin cambios) -->
+                    <!-- PREGUNTA 1: REACCIÓN A EMOCIONES -->
                     <div class="space-y-4">
                         <p class="text-lg font-semibold text-gray-800">1. ¿Cómo reaccionas cuando tu hijo/a tiene una rabieta o está frustrado?</p>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
@@ -94,7 +94,7 @@
                         </label>
                     </div>
 
-                    <!-- PREGUNTA 2 -->
+                    <!-- PREGUNTA 2: TIEMPO DE CALIDAD -->
                     <div class="space-y-4">
                         <p class="text-lg font-semibold text-gray-800">2. ¿Con qué frecuencia pasas tiempo de calidad individual con tu hijo/a?</p>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
@@ -111,7 +111,7 @@
                         </label>
                     </div>
 
-                    <!-- PREGUNTA 3 (Checkbox) -->
+                    <!-- PREGUNTA 3: MODELO A SEGUIR (Checkbox) -->
                     <div class="space-y-4">
                         <p class="text-lg font-semibold text-gray-800">3. ¿Qué acciones tomas consistentemente para ser un modelo a seguir positivo? <span class="text-sm font-normal text-gray-500">(Marca todas las que apliquen)</span></p>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
