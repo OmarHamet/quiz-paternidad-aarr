@@ -3,162 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación de la Paternidad Consciente</title>
-    <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
+    <title>Cuestionario Paternidad Consciente | El Despertar</title>
+    <!-- Carga de Tailwind CSS desde CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Configuración de fuente principal y estilos base */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        /* Configuración de fuente Inter para una estética moderna */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc;
+            background-color: #f7f9fb; /* Fondo suave */
         }
-        .container {
-            max-width: 800px;
-        }
-        .quiz-section {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
-        }
-        /* Estilos para las opciones de radio/checkbox */
-        .quiz-option input[type="radio"],
-        .quiz-option input[type="checkbox"] {
-            margin-right: 0.75rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            /* Color de acento verde */
-            accent-color: #059669; 
-        }
-        .quiz-option {
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .quiz-option:hover {
-            background-color: #f3f4f6;
+        /* Estilos personalizados para el foco en inputs y radios */
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            border-color: #3b82f6; /* Blue-500 */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
         }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8 min-h-screen flex items-center justify-center">
 
-    <div class="min-h-screen flex flex-col items-center py-12 px-4">
-        <div class="container w-full">
+    <div class="w-full max-w-2xl bg-white shadow-xl rounded-2xl p-6 md:p-10 border border-blue-100">
+        
+        <!-- Encabezado del Formulario -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-800 mb-2">
+                Descubre tu Estilo de Crianza
+            </h1>
+            <p class="text-gray-600">
+                Responde este breve cuestionario para acceder a nuestra página de inscripción y pago.
+            </p>
+        </header>
+
+        <!--
+            CONFIGURACIÓN CRUCIAL DEL FORMULARIO NETLIFY
+            1. netlify: Habilita el manejo del formulario por Netlify.
+            2. name="quiz-paternidad": Nombre que aparecerá en el panel de Netlify.
+            3. redirect (oculto): URL de destino para la redirección inmediata tras el envío exitoso.
+        -->
+        <form 
+            name="quiz-paternidad" 
+            method="POST" 
+            data-netlify="true" 
+            netlify 
+            class="space-y-6"
+        >
+            <!-- Campo Oculto para Netlify (MANDATORIO) -->
+            <input type="hidden" name="form-name" value="quiz-paternidad" />
             
-            <header class="text-center mb-12">
-                <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Evaluación de la Paternidad Consciente</h1>
-                <p class="text-xl text-gray-500">Descubre tu estilo de crianza y cómo puedes conectar mejor con tu hijo.</p>
-            </header>
+            <!-- Campo Oculto para Redirección (MANDATORIO) -->
+            <input 
+                type="hidden" 
+                name="redirect" 
+                value="https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr"
+            />
 
-            <div id="quiz-container" class="quiz-section">
+            <!-- SECCIÓN 1: CAPTURA DE LEADS -->
+            <div class="space-y-4 border-b pb-6 border-blue-100">
+                <h2 class="text-xl font-semibold text-blue-700">Tu Información de Acceso</h2>
                 
-                <!-- 
-                    FÓRMULA MÁXIMAMENTE EFECTIVA PARA NETLIFY:
-                    1. name="quiz-paternidad"
-                    2. data-netlify="true"
-                    3. netlify-honeypot="bot-field"
-                    4. CAMPO OCULTO 'redirect' con la URL EXACTA de destino.
-                -->
-                <form 
-                    name="quiz-paternidad" 
-                    method="POST" 
-                    data-netlify="true" 
-                    netlify-honeypot="bot-field"
-                    id="quizForm"
-                    class="space-y-10"
-                >
-                    <!-- Campos ocultos de Netlify: Nombre del formulario y anti-spam -->
-                    <input type="hidden" name="form-name" value="quiz-paternidad" />
-                    <div hidden>
-                        <label>No me llenes: <input name="bot-field" /></label>
-                    </div>
-
-                    <!-- >>> CAMPO CRÍTICO PARA LA REDIRECCIÓN INMEDIATA <<< -->
-                    <input type="hidden" name="redirect" value="https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr" />
-
-
-                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (CAPTURA DE LEADS) -->
-                    <div class="p-6 bg-green-50 border border-green-200 rounded-xl shadow-inner">
-                        <h2 class="text-2xl font-semibold text-green-800 mb-4">Paso 1: Tu Información</h2>
-                        <p class="text-green-700 mb-4">Ingresa tus datos para registrar tus respuestas antes de la redirección.</p>
-                        
-                        <!-- Campo Nombre -->
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 transition duration-150" placeholder="Tu nombre">
-                        </div>
-
-                        <!-- Campo Email -->
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 transition duration-150" placeholder="tu.correo@ejemplo.com">
-                        </div>
-                    </div>
-
-                    <!-- PREGUNTA 1: REACCIÓN A EMOCIONES -->
-                    <div class="space-y-4">
-                        <p class="text-lg font-semibold text-gray-800">1. ¿Cómo reaccionas cuando tu hijo/a tiene una rabieta o está frustrado?</p>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q1_emociones" value="Razón lógica (A)" required>
-                            <span class="ml-3 text-gray-700">A. Le pido que se calme y le explico por qué su comportamiento es incorrecto.</span>
-                        </label>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q1_emociones" value="Grito y frustración (B)">
-                            <span class="ml-3 text-gray-700">B. Me frustro y le grito para que detenga el berrinche de inmediato.</span>
-                        </label>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q1_emociones" value="Validación emocional (C)">
-                            <span class="ml-3 text-gray-700">C. Me agacho a su nivel, reconozco su emoción y luego buscamos una solución.</span>
-                        </label>
-                    </div>
-
-                    <!-- PREGUNTA 2: TIEMPO DE CALIDAD -->
-                    <div class="space-y-4">
-                        <p class="text-lg font-semibold text-gray-800">2. ¿Con qué frecuencia pasas tiempo de calidad individual con tu hijo/a?</p>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q2_tiempo_calidad" value="Diariamente (A)" required>
-                            <span class="ml-3 text-gray-700">A. Diariamente. Es una prioridad no negociable.</span>
-                        </label>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q2_tiempo_calidad" value="Semanalmente (B)">
-                            <span class="ml-3 text-gray-700">B. Una o dos veces por semana, si el tiempo y las actividades lo permiten.</span>
-                        </label>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q2_tiempo_calidad" value="Rara vez (C)">
-                            <span class="ml-3 text-gray-700">C. Rara vez, estamos muy ocupados y casi siempre es tiempo en grupo.</span>
-                        </label>
-                    </div>
-
-                    <!-- PREGUNTA 3: MODELO A SEGUIR (Checkbox) -->
-                    <div class="space-y-4">
-                        <p class="text-lg font-semibold text-gray-800">3. ¿Qué acciones tomas consistentemente para ser un modelo a seguir positivo? <span class="text-sm font-normal text-gray-500">(Marca todas las que apliquen)</span></p>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Pedir disculpas">
-                            <span class="ml-3 text-gray-700">A. Pido disculpas a mi hijo o pareja cuando me equivoco.</span>
-                        </label>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Manejo de estrés">
-                            <span class="ml-3 text-gray-700">B. Manejo mi propio estrés y frustración de forma saludable (ej. respiro, me alejo un momento).</span>
-                        </label>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Cumplimiento de promesas">
-                            <span class="ml-3 text-gray-700">C. Mantengo mis promesas y cumplo los límites que establezco.</span>
-                        </label>
-                        <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Evitar conflicto">
-                            <span class="ml-3 text-gray-700">D. Evito discusiones o conflictos fuertes con mi pareja o familiares delante de ellos.</span>
-                        </label>
-                    </div>
-                    
-                    <!-- Botón de Envío -->
-                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition duration-150 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
-                        Enviar y Acceder a la Página de Inscripción
-                    </button>
-                    
-                </form>
-
+                <!-- Nombre -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg transition duration-150 ease-in-out">
+                </div>
+                
+                <!-- Correo Electrónico -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg transition duration-150 ease-in-out">
+                </div>
             </div>
-        </div>
+
+            <!-- SECCIÓN 2: CUESTIONARIO -->
+            <h2 class="text-xl font-semibold text-blue-700 pt-4">Cuestionario de Estilo de Crianza</h2>
+
+            <!-- PREGUNTA 1 (Radio): Reacción a Rabieta -->
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">1. ¿Cómo reaccionas cuando tu hijo/a tiene una rabieta o está frustrado?</p>
+                <div class="space-y-2">
+                    <!-- Opción A -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="q1_emociones" value="Razón lógica (A)" required
+                               class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <span class="text-gray-700">Intento razonar o calmarlo inmediatamente con lógica (A)</span>
+                    </label>
+                    <!-- Opción B -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="q1_emociones" value="Grito y frustración (B)" required
+                               class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <span class="text-gray-700">Suelo gritar o me siento frustrado/a (B)</span>
+                    </label>
+                    <!-- Opción C -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="q1_emociones" value="Validación emocional (C)" required
+                               class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <span class="text-gray-700">Valido su emoción antes de buscar soluciones (C)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 2 (Radio): Tiempo de Calidad -->
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">2. ¿Con qué frecuencia pasas tiempo de calidad individual con tu hijo/a?</p>
+                <div class="space-y-2">
+                    <!-- Opción A -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="q2_tiempo_calidad" value="Diariamente (A)" required
+                               class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <span class="text-gray-700">Diariamente (A)</span>
+                    </label>
+                    <!-- Opción B -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="q2_tiempo_calidad" value="Semanalmente (B)" required
+                               class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <span class="text-gray-700">Semanalmente (B)</span>
+                    </label>
+                    <!-- Opción C -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="q2_tiempo_calidad" value="Rara vez (C)" required
+                               class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <span class="text-gray-700">Rara vez (C)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 3 (Checkbox): Modelo a Seguir -->
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">3. ¿Qué acciones tomas consistentemente para ser un modelo a seguir positivo? (Marca todas las que apliquen)</p>
+                <div class="space-y-2">
+                    <!-- Checkbox, name con [] para múltiples valores -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Pedir disculpas"
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <span class="text-gray-700">Pedir disculpas cuando me equivoco</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Manejo de estrés"
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <span class="text-gray-700">Manejar mi propio estrés de forma saludable</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Cumplimiento de promesas"
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <span class="text-gray-700">Cumplir las promesas que hago</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" name="q3_modelo_a_seguir[]" value="Evitar conflicto"
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <span class="text-gray-700">Evitar conflicto con mi pareja frente a mi hijo/a</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="pt-4">
+                <button type="submit" 
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl 
+                                transition duration-300 ease-in-out transform hover:scale-[1.01] shadow-lg hover:shadow-xl">
+                    Enviar Respuestas y Acceder a la Inscripción
+                </button>
+            </div>
+            
+            <!-- Aviso de Netlify -->
+            <p class="text-xs text-gray-400 text-center mt-4">
+                Powered by Netlify Forms.
+            </p>
+
+        </form>
     </div>
 
 </body>
