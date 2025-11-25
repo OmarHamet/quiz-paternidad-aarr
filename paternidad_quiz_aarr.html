@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Paternidad - AARR</title>
+    <!-- Carga de Tailwind CSS para un diseño limpio y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados para la fuente y el fondo */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .quiz-container {
+            max-width: 500px;
+        }
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        .progress-indicator {
+            height: 100%;
+            background-color: #3b82f6; /* Blue 500 */
+            transition: width 0.3s ease-in-out;
+        }
+        /* Estilos para ocultar preguntas y manejar transiciones */
+        .question-step {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-group input[type="radio"]:checked + label {
+            background-color: #3b82f6; /* Blue 500 */
+            color: white;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app" class="quiz-container bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full mx-4">
+        
+        <div class="flex items-center space-x-3 mb-6">
+            <div class="progress-bar flex-grow">
+                <div id="progressIndicator" class="progress-indicator" style="width: 0%;"></div>
+            </div>
+            <span id="progressText" class="text-sm font-medium text-gray-600">0/3</span>
+        </div>
+
+        <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Quiz de Paternidad AARR</h1>
+        <p class="text-sm text-gray-500 mb-6 text-center">¡Descubre tu estilo de paternidad en 3 sencillas preguntas!</p>
+
+        <!-- Formulario del Quiz -->
+        <form id="quizForm">
+            
+            <!-- Paso 1: Pregunta de Conciencia (Awareness) -->
+            <div id="step-1" class="question-step active">
+                <label class="block text-lg font-semibold text-gray-700 mb-4">1. ¿Cómo reaccionas típicamente cuando tu hijo/a comete un error?</label>
+                <div class="space-y-4">
+                    <div class="form-group">
+                        <input type="radio" id="q1a" name="question1" value="A" class="hidden">
+                        <label for="q1a" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            A. Le explico inmediatamente por qué estuvo mal y le muestro cómo corregirlo.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="q1b" name="question1" value="B" class="hidden">
+                        <label for="q1b" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            B. Le pregunto cómo se siente al respecto y qué cree que debería hacer diferente la próxima vez.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="q1c" name="question1" value="C" class="hidden">
+                        <label for="q1c" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            C. Ignoro el error para evitar hacerlo sentir mal.
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2: Pregunta de Relevancia (Relevance) -->
+            <div id="step-2" class="question-step">
+                <label class="block text-lg font-semibold text-gray-700 mb-4">2. ¿Qué tan importante es para ti que tu hijo/a te vea como un modelo a seguir, en lugar de solo como una autoridad?</label>
+                <div class="space-y-4">
+                    <div class="form-group">
+                        <input type="radio" id="q2a" name="question2" value="A" class="hidden">
+                        <label for="q2a" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            A. Muy importante, demuestro activamente los valores que quiero que tenga.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="q2b" name="question2" value="B" class="hidden">
+                        <label for="q2b" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            B. Algo importante, aunque creo que las reglas claras son más efectivas.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="q2c" name="question2" value="C" class="hidden">
+                        <label for="q2c" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            C. Poco importante, mi rol es solo establecer la disciplina.
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 3: Pregunta de Acción (Action) -->
+            <div id="step-3" class="question-step">
+                <label class="block text-lg font-semibold text-gray-700 mb-4">3. ¿Con qué frecuencia buscas activamente nueva información o estrategias sobre crianza y desarrollo infantil?</label>
+                <div class="space-y-4">
+                    <div class="form-group">
+                        <input type="radio" id="q3a" name="question3" value="A" class="hidden">
+                        <label for="q3a" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            A. Constantemente (leo libros, blogs o asisto a talleres).
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="q3b" name="question3" value="B" class="hidden">
+                        <label for="q3b" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            B. Ocasionalmente, si surge un problema específico.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="q3c" name="question3" value="C" class="hidden">
+                        <label for="q3c" class="block p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-200 hover:border-blue-500 hover:bg-blue-50">
+                            C. Casi nunca, confío en mi instinto y en cómo me criaron.
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 4: Captura de Correo (Resultados) -->
+            <div id="step-4" class="question-step">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">¡Casi Listo!</h2>
+                <p class="text-base text-gray-600 mb-6 text-center">Para recibir tu resultado personalizado y acceso a la guía de Paternidad, introduce tu correo electrónico:</p>
+
+                <div class="space-y-4">
+                    <input type="email" id="emailInput" placeholder="tu.correo@ejemplo.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                    <p id="emailError" class="text-red-500 text-sm hidden">Por favor, introduce un correo electrónico válido.</p>
+                </div>
+            </div>
+
+            <!-- Botones de Navegación -->
+            <div class="mt-8 flex justify-between">
+                <button type="button" id="prevBtn" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-semibold transition duration-200 hover:bg-gray-300 disabled:opacity-50" disabled>
+                    Anterior
+                </button>
+                <button type="button" id="nextBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-200 hover:bg-blue-700 disabled:opacity-50">
+                    Siguiente
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizForm = document.getElementById('quizForm');
+            const steps = document.querySelectorAll('.question-step');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressIndicator = document.getElementById('progressIndicator');
+            const progressText = document.getElementById('progressText');
+            const emailInput = document.getElementById('emailInput');
+            const emailError = document.getElementById('emailError');
+
+            let currentStep = 0;
+            const totalSteps = steps.length;
+            
+            // 🚨🚨 CRÍTICO: Reemplaza esta URL con la URL de tu Google Site 🚨🚨
+            const REDIRECT_URL = "https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr"; 
+
+            // Función para actualizar la barra de progreso
+            const updateProgress = () => {
+                const percent = (currentStep / (totalSteps - 1)) * 100;
+                progressIndicator.style.width = `${percent}%`;
+                progressText.textContent = `${Math.min(currentStep, totalSteps - 1)}/${totalSteps - 1}`;
+            };
+
+            // Función para mostrar el paso actual
+            const showStep = (stepIndex) => {
+                steps.forEach((step, index) => {
+                    step.style.display = index === stepIndex ? 'block' : 'none';
+                });
+
+                // Control de botones
+                prevBtn.disabled = stepIndex === 0;
+                nextBtn.textContent = stepIndex === totalSteps - 1 ? 'Enviar y Ver Resultado' : 'Siguiente';
+                updateNextButtonState();
+                
+                updateProgress();
+            };
+
+            // Función para actualizar el estado del botón Siguiente/Enviar
+            const updateNextButtonState = () => {
+                const currentQuestionName = `question${currentStep + 1}`;
+                const isOptionSelected = document.querySelector(`input[name="${currentQuestionName}"]:checked`);
+                
+                if (currentStep < totalSteps - 1) { // Pasos de Pregunta
+                    if (isOptionSelected) {
+                        nextBtn.disabled = false;
+                    } else {
+                        nextBtn.disabled = true;
+                    }
+                } else { // Paso de Email
+                    nextBtn.disabled = !emailInput.value || !emailInput.checkValidity();
+                }
+            };
+
+            // Event listener para las opciones de respuesta (habilita el botón Siguiente)
+            quizForm.addEventListener('change', (e) => {
+                if (e.target.type === 'radio') {
+                    updateNextButtonState();
+                }
+            });
+
+            // Event listener para la validación del correo (habilita el botón Enviar)
+            emailInput.addEventListener('input', () => {
+                if (emailInput.checkValidity()) {
+                    emailError.classList.add('hidden');
+                    nextBtn.disabled = false;
+                } else {
+                    emailError.classList.remove('hidden');
+                    nextBtn.disabled = true;
+                }
+            });
+
+            // Lógica del botón Siguiente/Enviar
+            nextBtn.addEventListener('click', () => {
+                if (currentStep < totalSteps - 1) {
+                    const currentQuestionName = `question${currentStep + 1}`;
+                    const isOptionSelected = document.querySelector(`input[name="${currentQuestionName}"]:checked`);
+                    
+                    if (isOptionSelected) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                } else {
+                    // Lógica de Envío/Finalización
+                    if (emailInput.checkValidity()) {
+                        emailError.classList.add('hidden');
+                        
+                        const email = emailInput.value;
+                        
+                        // 1. Recolección de Respuestas (opcional, para enviar al servidor)
+                        const answers = {
+                            q1: quizForm.elements.question1.value,
+                            q2: quizForm.elements.question2.value,
+                            q3: quizForm.elements.question3.value,
+                            email: email
+                        };
+
+                        // Aquí se agregaría la lógica para enviar 'answers' y 'email' a tu herramienta de marketing
+                        
+                        // 2. Redirección final
+                        window.location.href = REDIRECT_URL;
+                        
+                    } else {
+                        emailError.classList.remove('hidden');
+                    }
+                }
+            });
+
+            // Lógica del botón Anterior
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+
+            // Inicializar el quiz en el primer paso
+            showStep(currentStep);
+        });
+    </script>
+</body>
+</html>
