@@ -54,14 +54,12 @@
                 <!-- 
                     *** CONFIGURACIÓN DE NETLIFY FORMS (CRUCIAL) ***
                     'name="quiz-paternidad"', 'method="POST"', 'data-netlify="true"' 
-                    Estos atributos garantizan que Netlify capture el envío.
                 -->
                 <form 
                     name="quiz-paternidad" 
                     method="POST" 
                     data-netlify="true" 
                     netlify-honeypot="bot-field"
-                    onsubmit="return validateAndSubmit(event)" 
                     id="quizForm"
                     class="space-y-10"
                 >
@@ -71,7 +69,14 @@
                         <label>No me llenes: <input name="bot-field" /></label>
                     </div>
 
-                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (Para el Lead Magnet) -->
+                    <!-- 
+                        *** CAMPO DE REDIRECCIÓN A GOOGLE SITES (OBLIGATORIO) ***
+                        URL proporcionada por el usuario para la página de agradecimiento.
+                    -->
+                    <input type="hidden" name="redirect" value="https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr" />
+
+
+                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO -->
                     <div class="p-6 bg-green-50 border border-green-200 rounded-xl shadow-inner">
                         <h2 class="text-2xl font-semibold text-green-800 mb-4">Paso 1: Tu Información</h2>
                         <p class="text-green-700 mb-4">Te enviaremos los resultados detallados y una guía personalizada de crianza basada en tus respuestas.</p>
@@ -147,78 +152,16 @@
                         </label>
                     </div>
                     
-                    <!-- Botón de Envío: MANTENER ESTE TEXTO -->
+                    <!-- Botón de Envío: Al hacer clic, Netlify guarda los datos y luego redirige al URL que está preconfigurada. -->
                     <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition duration-150 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
-                        Ver Mis Resultados y Recibir mi Guía
+                        Enviar y Acceder a la Página de Agradecimiento
                     </button>
                     
-                    <!-- Contenedor para mensajes de validación/éxito -->
-                    <div id="message-container" class="mt-4 p-4 text-center hidden rounded-lg" role="alert"></div>
-
                 </form>
 
             </div>
         </div>
     </div>
 
-    <!-- 
-        *** LÓGICA DE VALIDACIÓN Y NETLIFY ***
-        Esta función se encarga de mostrar el mensaje de éxito al usuario y activar el envío a Netlify.
-    -->
-    <script>
-        // Función para validar el formulario y simular la calificación
-        function validateAndSubmit(event) {
-            const form = document.getElementById('quizForm');
-            const messageContainer = document.getElementById('message-container');
-            const name = document.getElementById('name').value;
-            
-            // 1. Lógica de Calificación (Simulada para mostrar el puntaje)
-            const score = calculateScore(form);
-            const totalQuestions = 3; 
-
-            // 2. Mensaje de Éxito al Usuario
-            messageContainer.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'border-red-400');
-            messageContainer.classList.add('bg-green-100', 'text-green-700', 'border-green-400', 'border');
-            
-            // Mensaje que verán al instante.
-            messageContainer.innerHTML = `
-                <p class="font-bold">¡Excelente, ${name}!</p>
-                <p>Tu información y respuestas han sido enviadas. ¡Tu puntaje provisional es ${score}/${totalQuestions}!</p>
-                <p><strong>Revisa tu correo:</strong> En unos minutos recibirás tu análisis completo y tu guía personalizada. ¡Gracias por participar!</p>
-            `;
-
-            // Ocultar el formulario y mostrar solo el mensaje
-            form.style.display = 'none';
-
-            // Retornamos true para que se envíe el formulario a Netlify
-            return true;
-        }
-
-        // Función de ejemplo para CALCULAR el puntaje.
-        function calculateScore(form) {
-            let score = 0;
-            
-            // P1: Validación Emocional (C) es la respuesta de puntuación alta
-            const q1 = form.elements['q1_emociones'] ? form.elements['q1_emociones'].value : '';
-            if (q1 === 'Validación emocional (C)') {
-                score += 1;
-            }
-
-            // P2: Diariamente (A) es la respuesta de puntuación alta
-            const q2 = form.elements['q2_tiempo_calidad'] ? form.elements['q2_tiempo_calidad'].value : '';
-            if (q2 === 'Diariamente (A)') {
-                score += 1;
-            }
-
-            // P3: Obtiene 1 punto si marca dos o más opciones positivas (A, B, C, D)
-            const q3_options = form.querySelectorAll('input[name="q3_modelo_a_seguir[]"]:checked');
-            if (q3_options.length >= 2) {
-                 score += 1; 
-            }
-            
-            return score;
-        }
-
-    </script>
 </body>
 </html>
