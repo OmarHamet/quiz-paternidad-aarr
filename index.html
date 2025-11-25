@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz: [INSERTA AQUÍ TU TEMA]</title>
+    <title>Evaluación de la Paternidad Consciente</title>
     <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -28,7 +28,7 @@
             margin-right: 0.75rem;
             width: 1.25rem;
             height: 1.25rem;
-            accent-color: #4f46e5; /* Color morado principal */
+            accent-color: #059669; /* Color verde principal para un tema de bienestar/crianza */
         }
         .quiz-option {
             transition: all 0.2s;
@@ -45,20 +45,19 @@
         <div class="container w-full">
             
             <header class="text-center mb-12">
-                <!-- 1. EDITAR TÍTULO PRINCIPAL -->
-                <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Evalúa tu Estrategia Digital</h1>
-                <!-- 2. EDITAR SUBTÍTULO O GANCHO -->
-                <p class="text-xl text-gray-500">Descubre tus puntos fuertes y qué áreas necesitas reforzar.</p>
+                <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Evaluación de la Paternidad Consciente</h1>
+                <p class="text-xl text-gray-500">Descubre tu estilo de crianza y cómo puedes conectar mejor con tu hijo.</p>
             </header>
 
             <div id="quiz-container" class="quiz-section">
                 
                 <!-- 
-                    *** IMPORTANTE: NO TOCAR ESTOS ATRIBUTOS DEL FORMULARIO ***
-                    'name="quiz-estrategia"', 'method="POST"', 'data-netlify="true"' 
+                    *** CONFIGURACIÓN DE NETLIFY FORMS (CRUCIAL) ***
+                    'name="quiz-paternidad"', 'method="POST"', 'data-netlify="true"' 
+                    Estos atributos garantizan que Netlify capture el envío.
                 -->
                 <form 
-                    name="quiz-estrategia" 
+                    name="quiz-paternidad" 
                     method="POST" 
                     data-netlify="true" 
                     netlify-honeypot="bot-field"
@@ -67,92 +66,90 @@
                     class="space-y-10"
                 >
                     <!-- Campos ocultos de Netlify. NO TOCAR -->
-                    <input type="hidden" name="form-name" value="quiz-estrategia" />
+                    <input type="hidden" name="form-name" value="quiz-paternidad" />
                     <div hidden>
                         <label>No me llenes: <input name="bot-field" /></label>
                     </div>
 
-                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (MANTENER ESTO) -->
-                    <div class="p-6 bg-indigo-50 border border-indigo-200 rounded-xl shadow-inner">
-                        <h2 class="text-2xl font-semibold text-indigo-800 mb-4">Paso 1: Tu Información</h2>
-                        <p class="text-indigo-700 mb-4">Te enviaremos los resultados detallados y un recurso exclusivo basado en tu puntuación.</p>
+                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (Para el Lead Magnet) -->
+                    <div class="p-6 bg-green-50 border border-green-200 rounded-xl shadow-inner">
+                        <h2 class="text-2xl font-semibold text-green-800 mb-4">Paso 1: Tu Información</h2>
+                        <p class="text-green-700 mb-4">Te enviaremos los resultados detallados y una guía personalizada de crianza basada en tus respuestas.</p>
                         
                         <!-- Campo Nombre (name="name" es crucial) -->
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="Tu nombre">
+                            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 transition duration-150" placeholder="Tu nombre">
                         </div>
 
                         <!-- Campo Email (name="email" es crucial) -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="tu.correo@ejemplo.com">
+                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 transition duration-150" placeholder="tu.correo@ejemplo.com">
                         </div>
                     </div>
 
-                    <!-- INICIO DEL QUIZ - EDITA ESTAS SECCIONES -->
-
-                    <!-- PREGUNTA 1: EDITA AQUÍ EL TEXTO -->
+                    <!-- PREGUNTA 1: REACCIÓN A EMOCIONES -->
                     <div class="space-y-4">
-                        <p class="text-lg font-semibold text-gray-800">1. ¿Qué tan definido está tu Buyer Persona (cliente ideal)?</p>
-                        <!-- IMPORTANTE: Mantén el atributo name="q1_buyer_persona" en todas las opciones -->
+                        <p class="text-lg font-semibold text-gray-800">1. ¿Cómo reaccionas cuando tu hijo/a tiene una rabieta o está frustrado?</p>
+                        <!-- name="q1_emociones" -->
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q1_buyer_persona" value="Muy definido" required>
-                            <span class="ml-3 text-gray-700">A. Muy definido. Tengo documentos detallados de sus metas y desafíos. (EDITAR ESTE TEXTO)</span>
+                            <input type="radio" name="q1_emociones" value="Razón lógica (A)" required>
+                            <span class="ml-3 text-gray-700">A. Le pido que se calme y le explico por qué su comportamiento es incorrecto.</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q1_buyer_persona" value="Definición básica">
-                            <span class="ml-3 text-gray-700">B. Definición básica. Sé quién es, pero no sus motivaciones profundas. (EDITAR ESTE TEXTO)</span>
+                            <input type="radio" name="q1_emociones" value="Grito y frustración (B)">
+                            <span class="ml-3 text-gray-700">B. Me frustro y le grito para que detenga el berrinche de inmediato.</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q1_buyer_persona" value="No definido">
-                            <span class="ml-3 text-gray-700">C. No definido. Simplemente apunto a "todos los interesados". (EDITAR ESTE TEXTO)</span>
+                            <input type="radio" name="q1_emociones" value="Validación emocional (C)">
+                            <span class="ml-3 text-gray-700">C. Me agacho a su nivel, reconozco su emoción y luego buscamos una solución.</span>
                         </label>
                     </div>
 
-                    <!-- PREGUNTA 2: EDITA AQUÍ EL TEXTO -->
+                    <!-- PREGUNTA 2: TIEMPO DE CALIDAD -->
                     <div class="space-y-4">
-                        <p class="text-lg font-semibold text-gray-800">2. ¿Cuál es el objetivo principal de tu presencia en Redes Sociales?</p>
-                        <!-- IMPORTANTE: Mantén el atributo name="q2_rrss_objetivo" en todas las opciones -->
+                        <p class="text-lg font-semibold text-gray-800">2. ¿Con qué frecuencia pasas tiempo de calidad individual con tu hijo/a?</p>
+                        <!-- name="q2_tiempo_calidad" -->
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q2_rrss_objetivo" value="Generar ventas directas" required>
-                            <span class="ml-3 text-gray-700">A. Generar ventas directas e inmediatas. (EDITAR ESTE TEXTO)</span>
+                            <input type="radio" name="q2_tiempo_calidad" value="Diariamente (A)" required>
+                            <span class="ml-3 text-gray-700">A. Diariamente. Es una prioridad no negociable.</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q2_rrss_objetivo" value="Construir comunidad y marca">
-                            <span class="ml-3 text-gray-700">B. Construir comunidad, fortalecer la marca y generar tráfico al sitio web. (EDITAR ESTE TEXTO)</span>
+                            <input type="radio" name="q2_tiempo_calidad" value="Semanalmente (B)">
+                            <span class="ml-3 text-gray-700">B. Una o dos veces por semana, si el tiempo y las actividades lo permiten.</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="radio" name="q2_rrss_objetivo" value="Solo postear novedades">
-                            <span class="ml-3 text-gray-700">C. Solo postear novedades o contenido de relleno cuando me acuerdo. (EDITAR ESTE TEXTO)</span>
+                            <input type="radio" name="q2_tiempo_calidad" value="Rara vez (C)">
+                            <span class="ml-3 text-gray-700">C. Rara vez, estamos muy ocupados y casi siempre es tiempo en grupo.</span>
                         </label>
                     </div>
 
-                    <!-- PREGUNTA 3: EDITA AQUÍ EL TEXTO -->
+                    <!-- PREGUNTA 3: MODELO A SEGUIR (Checkbox) -->
                     <div class="space-y-4">
-                        <p class="text-lg font-semibold text-gray-800">3. ¿Qué métricas mides de forma consistente? <span class="text-sm font-normal text-gray-500">(Marca todas las que apliquen)</span></p>
-                        <!-- IMPORTANTE: Mantén el atributo name="q3_metricas[]" en todas las opciones (es un array) -->
+                        <p class="text-lg font-semibold text-gray-800">3. ¿Qué acciones tomas consistentemente para ser un modelo a seguir positivo? <span class="text-sm font-normal text-gray-500">(Marca todas las que apliquen)</span></p>
+                        <!-- name="q3_modelo_a_seguir[]" (Importante el "[]" para checkboxes) -->
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_metricas[]" value="Tasa de Conversión">
-                            <span class="ml-3 text-gray-700">A. Tasa de Conversión (Leads, Compras, etc.) (EDITAR ESTE TEXTO)</span>
+                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Pedir disculpas">
+                            <span class="ml-3 text-gray-700">A. Pido disculpas a mi hijo o pareja cuando me equivoco.</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_metricas[]" value="Costo de Adquisición (CAC)">
-                            <span class="ml-3 text-gray-700">B. Costo de Adquisición de Cliente (CAC) (EDITAR ESTE TEXTO)</span>
+                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Manejo de estrés">
+                            <span class="ml-3 text-gray-700">B. Manejo mi propio estrés y frustración de forma saludable (ej. respiro, me alejo un momento).</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_metricas[]" value="Tráfico y Alcance">
-                            <span class="ml-3 text-gray-700">C. Tráfico web o Alcance en Redes Sociales. (EDITAR ESTE TEXTO)</span>
+                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Cumplimiento de promesas">
+                            <span class="ml-3 text-gray-700">C. Mantengo mis promesas y cumplo los límites que establezco.</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
-                            <input type="checkbox" name="q3_metricas[]" value="Ninguna">
-                            <span class="ml-3 text-gray-700">D. Ninguna. Solo veo la cantidad de "me gusta". (EDITAR ESTE TEXTO)</span>
+                            <input type="checkbox" name="q3_modelo_a_seguir[]" value="Evitar conflicto">
+                            <span class="ml-3 text-gray-700">D. Evito discusiones o conflictos fuertes con mi pareja o familiares delante de ellos.</span>
                         </label>
                     </div>
                     
                     <!-- Botón de Envío: MANTENER ESTE TEXTO -->
-                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition duration-150 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
-                        Ver Mis Resultados y Recibir el Reporte
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition duration-150 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
+                        Ver Mis Resultados y Recibir mi Guía
                     </button>
                     
                     <!-- Contenedor para mensajes de validación/éxito -->
@@ -166,7 +163,7 @@
 
     <!-- 
         *** LÓGICA DE VALIDACIÓN Y NETLIFY ***
-        NO TOCAR esta sección, salvo que desees cambiar la lógica de calculateScore.
+        Esta función se encarga de mostrar el mensaje de éxito al usuario y activar el envío a Netlify.
     -->
     <script>
         // Función para validar el formulario y simular la calificación
@@ -175,7 +172,7 @@
             const messageContainer = document.getElementById('message-container');
             const name = document.getElementById('name').value;
             
-            // 1. Lógica de Calificación (Simulada por ahora)
+            // 1. Lógica de Calificación (Simulada para mostrar el puntaje)
             const score = calculateScore(form);
             const totalQuestions = 3; 
 
@@ -187,7 +184,7 @@
             messageContainer.innerHTML = `
                 <p class="font-bold">¡Excelente, ${name}!</p>
                 <p>Tu información y respuestas han sido enviadas. ¡Tu puntaje provisional es ${score}/${totalQuestions}!</p>
-                <p><strong>Revisa tu correo:</strong> En unos minutos recibirás tu análisis completo y personalizado. ¡Gracias por participar!</p>
+                <p><strong>Revisa tu correo:</strong> En unos minutos recibirás tu análisis completo y tu guía personalizada. ¡Gracias por participar!</p>
             `;
 
             // Ocultar el formulario y mostrar solo el mensaje
@@ -198,31 +195,24 @@
         }
 
         // Función de ejemplo para CALCULAR el puntaje.
-        // EDITA ESTA FUNCIÓN si quieres que el puntaje provisional sea más preciso.
         function calculateScore(form) {
             let score = 0;
             
-            // P1: Si escoge 'Muy definido' (A) o 'Definición básica' (B), asumimos 1 punto.
-            const q1 = form.elements['q1_buyer_persona'].value;
-            if (q1 === 'Muy definido' || q1 === 'Definición básica') {
+            // P1: Validación Emocional (C) es la respuesta de puntuación alta
+            const q1 = form.elements['q1_emociones'] ? form.elements['q1_emociones'].value : '';
+            if (q1 === 'Validación emocional (C)') {
                 score += 1;
             }
 
-            // P2: Si escoge 'Construir comunidad y marca' (B), asumimos 1 punto.
-            const q2 = form.elements['q2_rrss_objetivo'].value;
-            if (q2 === 'Construir comunidad y marca') {
+            // P2: Diariamente (A) es la respuesta de puntuación alta
+            const q2 = form.elements['q2_tiempo_calidad'] ? form.elements['q2_tiempo_calidad'].value : '';
+            if (q2 === 'Diariamente (A)') {
                 score += 1;
             }
 
-            // P3: Si escoge 'Tasa de Conversión' y 'Costo de Adquisición', asumimos 1 punto.
-            const q3_options = form.querySelectorAll('input[name="q3_metricas[]"]:checked');
-            let q3_scores = 0;
-            q3_options.forEach(option => {
-                if (option.value === 'Tasa de Conversión' || option.value === 'Costo de Adquisición (CAC)') {
-                    q3_scores += 0.5;
-                }
-            });
-            if (q3_scores > 0) {
+            // P3: Obtiene 1 punto si marca dos o más opciones positivas (A, B, C, D)
+            const q3_options = form.querySelectorAll('input[name="q3_modelo_a_seguir[]"]:checked');
+            if (q3_options.length >= 2) {
                  score += 1; 
             }
             
