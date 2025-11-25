@@ -53,12 +53,11 @@
             <div id="quiz-container" class="quiz-section">
                 
                 <!-- 
-                    CONFIGURACIÓN DEL FORMULARIO FUNCIONAL:
-                    - name="quiz-paternidad"
-                    - method="POST"
-                    - data-netlify="true"
-                    - netlify-honeypot="bot-field"
-                    - input type="hidden" name="redirect" apuntando a la URL externa.
+                    FÓRMULA MÁXIMAMENTE EFECTIVA PARA NETLIFY:
+                    1. name="quiz-paternidad"
+                    2. data-netlify="true"
+                    3. netlify-honeypot="bot-field"
+                    4. CAMPO OCULTO 'redirect' con la URL EXACTA de destino.
                 -->
                 <form 
                     name="quiz-paternidad" 
@@ -68,20 +67,20 @@
                     id="quizForm"
                     class="space-y-10"
                 >
-                    <!-- Campos ocultos de Netlify para spam y nombre del formulario -->
+                    <!-- Campos ocultos de Netlify: Nombre del formulario y anti-spam -->
                     <input type="hidden" name="form-name" value="quiz-paternidad" />
                     <div hidden>
                         <label>No me llenes: <input name="bot-field" /></label>
                     </div>
 
-                    <!-- REDIRECCIÓN EXTERNA AL GOOGLE SITE (Versión confirmada como funcional) -->
+                    <!-- >>> CAMPO CRÍTICO PARA LA REDIRECCIÓN INMEDIATA <<< -->
                     <input type="hidden" name="redirect" value="https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr" />
 
 
-                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO -->
+                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (CAPTURA DE LEADS) -->
                     <div class="p-6 bg-green-50 border border-green-200 rounded-xl shadow-inner">
                         <h2 class="text-2xl font-semibold text-green-800 mb-4">Paso 1: Tu Información</h2>
-                        <p class="text-green-700 mb-4">Te enviaremos los resultados detallados y una guía personalizada de crianza basada en tus respuestas.</p>
+                        <p class="text-green-700 mb-4">Ingresa tus datos para registrar tus respuestas antes de la redirección.</p>
                         
                         <!-- Campo Nombre -->
                         <div class="mb-4">
