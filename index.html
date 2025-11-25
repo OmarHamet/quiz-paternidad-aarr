@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Estrategia Digital</title>
+    <title>Quiz: [INSERTA AQUÍ TU TEMA]</title>
     <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -45,17 +45,17 @@
         <div class="container w-full">
             
             <header class="text-center mb-12">
+                <!-- 1. EDITAR TÍTULO PRINCIPAL -->
                 <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Evalúa tu Estrategia Digital</h1>
+                <!-- 2. EDITAR SUBTÍTULO O GANCHO -->
                 <p class="text-xl text-gray-500">Descubre tus puntos fuertes y qué áreas necesitas reforzar.</p>
             </header>
 
             <div id="quiz-container" class="quiz-section">
                 
                 <!-- 
-                    *** IMPORTANTE PARA NETLIFY FORMS ***
-                    1. Atributo 'name="quiz-form"': Este será el nombre de tu base de datos en Netlify.
-                    2. Atributo 'data-netlify="true"': Indica a Netlify que debe capturar los datos.
-                    3. Método 'POST': Obligatorio para enviar la información a Netlify.
+                    *** IMPORTANTE: NO TOCAR ESTOS ATRIBUTOS DEL FORMULARIO ***
+                    'name="quiz-estrategia"', 'method="POST"', 'data-netlify="true"' 
                 -->
                 <form 
                     name="quiz-estrategia" 
@@ -66,90 +66,91 @@
                     id="quizForm"
                     class="space-y-10"
                 >
-                    <!-- Campo oculto requerido por Netlify para evitar spam -->
+                    <!-- Campos ocultos de Netlify. NO TOCAR -->
                     <input type="hidden" name="form-name" value="quiz-estrategia" />
                     <div hidden>
                         <label>No me llenes: <input name="bot-field" /></label>
                     </div>
 
-                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (CRUCIAL PARA LA ESTRATEGIA) -->
+                    <!-- SECCIÓN DE INFORMACIÓN DEL CONTACTO (MANTENER ESTO) -->
                     <div class="p-6 bg-indigo-50 border border-indigo-200 rounded-xl shadow-inner">
                         <h2 class="text-2xl font-semibold text-indigo-800 mb-4">Paso 1: Tu Información</h2>
                         <p class="text-indigo-700 mb-4">Te enviaremos los resultados detallados y un recurso exclusivo basado en tu puntuación.</p>
                         
-                        <!-- Campo Nombre -->
+                        <!-- Campo Nombre (name="name" es crucial) -->
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                            <!-- El atributo 'name="name"' es clave para que el dato se guarde -->
                             <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="Tu nombre">
                         </div>
 
-                        <!-- Campo Email -->
+                        <!-- Campo Email (name="email" es crucial) -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                            <!-- El atributo 'name="email"' es clave para que el dato se guarde -->
                             <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="tu.correo@ejemplo.com">
                         </div>
                     </div>
 
-                    <!-- PREGUNTA 1: Definición de Buyer Persona -->
+                    <!-- INICIO DEL QUIZ - EDITA ESTAS SECCIONES -->
+
+                    <!-- PREGUNTA 1: EDITA AQUÍ EL TEXTO -->
                     <div class="space-y-4">
                         <p class="text-lg font-semibold text-gray-800">1. ¿Qué tan definido está tu Buyer Persona (cliente ideal)?</p>
-                        <!-- Todas las opciones tienen el mismo 'name="q1_buyer_persona"' -->
+                        <!-- IMPORTANTE: Mantén el atributo name="q1_buyer_persona" en todas las opciones -->
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="radio" name="q1_buyer_persona" value="Muy definido" required>
-                            <span class="ml-3 text-gray-700">A. Muy definido. Tengo documentos detallados de sus metas y desafíos.</span>
+                            <span class="ml-3 text-gray-700">A. Muy definido. Tengo documentos detallados de sus metas y desafíos. (EDITAR ESTE TEXTO)</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="radio" name="q1_buyer_persona" value="Definición básica">
-                            <span class="ml-3 text-gray-700">B. Definición básica. Sé quién es, pero no sus motivaciones profundas.</span>
+                            <span class="ml-3 text-gray-700">B. Definición básica. Sé quién es, pero no sus motivaciones profundas. (EDITAR ESTE TEXTO)</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="radio" name="q1_buyer_persona" value="No definido">
-                            <span class="ml-3 text-gray-700">C. No definido. Simplemente apunto a "todos los interesados".</span>
+                            <span class="ml-3 text-gray-700">C. No definido. Simplemente apunto a "todos los interesados". (EDITAR ESTE TEXTO)</span>
                         </label>
                     </div>
 
-                    <!-- PREGUNTA 2: Presencia en Redes Sociales -->
+                    <!-- PREGUNTA 2: EDITA AQUÍ EL TEXTO -->
                     <div class="space-y-4">
                         <p class="text-lg font-semibold text-gray-800">2. ¿Cuál es el objetivo principal de tu presencia en Redes Sociales?</p>
+                        <!-- IMPORTANTE: Mantén el atributo name="q2_rrss_objetivo" en todas las opciones -->
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="radio" name="q2_rrss_objetivo" value="Generar ventas directas" required>
-                            <span class="ml-3 text-gray-700">A. Generar ventas directas e inmediatas.</span>
+                            <span class="ml-3 text-gray-700">A. Generar ventas directas e inmediatas. (EDITAR ESTE TEXTO)</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="radio" name="q2_rrss_objetivo" value="Construir comunidad y marca">
-                            <span class="ml-3 text-gray-700">B. Construir comunidad, fortalecer la marca y generar tráfico al sitio web.</span>
+                            <span class="ml-3 text-gray-700">B. Construir comunidad, fortalecer la marca y generar tráfico al sitio web. (EDITAR ESTE TEXTO)</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="radio" name="q2_rrss_objetivo" value="Solo postear novedades">
-                            <span class="ml-3 text-gray-700">C. Solo postear novedades o contenido de relleno cuando me acuerdo.</span>
+                            <span class="ml-3 text-gray-700">C. Solo postear novedades o contenido de relleno cuando me acuerdo. (EDITAR ESTE TEXTO)</span>
                         </label>
                     </div>
 
-                    <!-- PREGUNTA 3: Medición de Resultados (Multi-opción) -->
+                    <!-- PREGUNTA 3: EDITA AQUÍ EL TEXTO -->
                     <div class="space-y-4">
                         <p class="text-lg font-semibold text-gray-800">3. ¿Qué métricas mides de forma consistente? <span class="text-sm font-normal text-gray-500">(Marca todas las que apliquen)</span></p>
-                        <!-- Aquí usamos Checkbox con el mismo 'name="q3_metricas"' pero con la notación de array '[]' -->
+                        <!-- IMPORTANTE: Mantén el atributo name="q3_metricas[]" en todas las opciones (es un array) -->
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="checkbox" name="q3_metricas[]" value="Tasa de Conversión">
-                            <span class="ml-3 text-gray-700">A. Tasa de Conversión (Leads, Compras, etc.)</span>
+                            <span class="ml-3 text-gray-700">A. Tasa de Conversión (Leads, Compras, etc.) (EDITAR ESTE TEXTO)</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="checkbox" name="q3_metricas[]" value="Costo de Adquisición (CAC)">
-                            <span class="ml-3 text-gray-700">B. Costo de Adquisición de Cliente (CAC)</span>
+                            <span class="ml-3 text-gray-700">B. Costo de Adquisición de Cliente (CAC) (EDITAR ESTE TEXTO)</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="checkbox" name="q3_metricas[]" value="Tráfico y Alcance">
-                            <span class="ml-3 text-gray-700">C. Tráfico web o Alcance en Redes Sociales.</span>
+                            <span class="ml-3 text-gray-700">C. Tráfico web o Alcance en Redes Sociales. (EDITAR ESTE TEXTO)</span>
                         </label>
                         <label class="flex items-center p-4 bg-white border border-gray-200 rounded-lg quiz-option">
                             <input type="checkbox" name="q3_metricas[]" value="Ninguna">
-                            <span class="ml-3 text-gray-700">D. Ninguna. Solo veo la cantidad de "me gusta".</span>
+                            <span class="ml-3 text-gray-700">D. Ninguna. Solo veo la cantidad de "me gusta". (EDITAR ESTE TEXTO)</span>
                         </label>
                     </div>
                     
-                    <!-- Botón de Envío -->
+                    <!-- Botón de Envío: MANTENER ESTE TEXTO -->
                     <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition duration-150 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
                         Ver Mis Resultados y Recibir el Reporte
                     </button>
@@ -163,7 +164,10 @@
         </div>
     </div>
 
-    <!-- Script de JavaScript para la validación (calificación y mensaje) -->
+    <!-- 
+        *** LÓGICA DE VALIDACIÓN Y NETLIFY ***
+        NO TOCAR esta sección, salvo que desees cambiar la lógica de calculateScore.
+    -->
     <script>
         // Función para validar el formulario y simular la calificación
         function validateAndSubmit(event) {
@@ -172,7 +176,6 @@
             const name = document.getElementById('name').value;
             
             // 1. Lógica de Calificación (Simulada por ahora)
-            // Esto es lo MÍNIMO para darle una respuesta al usuario, mientras tú recolectas los datos
             const score = calculateScore(form);
             const totalQuestions = 3; 
 
@@ -180,7 +183,7 @@
             messageContainer.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'border-red-400');
             messageContainer.classList.add('bg-green-100', 'text-green-700', 'border-green-400', 'border');
             
-            // Mensaje que verán al instante. El resultado detallado lo recibirán por correo (estrategia)
+            // Mensaje que verán al instante.
             messageContainer.innerHTML = `
                 <p class="font-bold">¡Excelente, ${name}!</p>
                 <p>Tu información y respuestas han sido enviadas. ¡Tu puntaje provisional es ${score}/${totalQuestions}!</p>
@@ -190,20 +193,14 @@
             // Ocultar el formulario y mostrar solo el mensaje
             form.style.display = 'none';
 
-            // 3. Permite que Netlify capture el formulario
-            // Como retornamos 'true', el formulario se envía al servicio de Netlify.
-            // Netlify automáticamente maneja la redirección/mensaje en el backend.
-            // Para ver los datos, debes ir a tu panel de Netlify.
-
             // Retornamos true para que se envíe el formulario a Netlify
             return true;
         }
 
-        // Función de ejemplo para CALCULAR el puntaje (TÚ DEBES DEFINIR LA LÓGICA DE LAS RESPUESTAS CORRECTAS)
+        // Función de ejemplo para CALCULAR el puntaje.
+        // EDITA ESTA FUNCIÓN si quieres que el puntaje provisional sea más preciso.
         function calculateScore(form) {
             let score = 0;
-            
-            // Ejemplo de lógica simple: Asignar 1 punto a la respuesta B de la pregunta 1 y 2.
             
             // P1: Si escoge 'Muy definido' (A) o 'Definición básica' (B), asumimos 1 punto.
             const q1 = form.elements['q1_buyer_persona'].value;
@@ -218,7 +215,6 @@
             }
 
             // P3: Si escoge 'Tasa de Conversión' y 'Costo de Adquisición', asumimos 1 punto.
-            // Esto es más complejo en checkboxes, solo revisamos si eligió la primera opción A
             const q3_options = form.querySelectorAll('input[name="q3_metricas[]"]:checked');
             let q3_scores = 0;
             q3_options.forEach(option => {
@@ -227,7 +223,7 @@
                 }
             });
             if (q3_scores > 0) {
-                 score += 1; // Le damos 1 punto si mide al menos las dos métricas clave.
+                 score += 1; 
             }
             
             return score;
