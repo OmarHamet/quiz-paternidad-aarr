@@ -3,143 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuestionario de Acceso y Captura de Leads</title>
-    <!-- Carga de Tailwind CSS desde CDN -->
+    <title>Redirigiendo a Inscripción...</title>
+    <!-- Carga de Tailwind CSS para estética -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Configuración de fuente Inter para una estética moderna y legible */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #eef2ff; /* Fondo muy suave (Indigo-50) */
+            background-color: #f0f4f8; /* Fondo suave */
         }
-        /* Estilos para asegurar que los inputs se vean bien en foco */
-        input[type="text"]:focus,
-        input[type="email"]:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5); /* Sombra de foco índigo */
+        /* Clase para el mensaje de depuración */
+        .debug-message {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 8px;
+            background-color: #fca5a5; /* Rojo claro */
+            color: #7f1d1d; /* Rojo oscuro */
+            font-size: 10px;
+            text-align: center;
+            border-top: 2px solid #ef4444;
         }
     </style>
+
+    <!-- METODO 1: Redirección con Meta Tag (Activación inmediata, invisible para el usuario) -->
+    <!-- Redirige después de 0.5 segundos (500 milisegundos) a la URL de su Google Site -->
+    <meta http-equiv="refresh" content="0.5; url=https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr">
 </head>
 <body class="p-4 md:p-8 min-h-screen flex items-center justify-center">
 
-<!-- INICIO DEL FORMULARIO DE CAPTURA DE LEADS Y QUIZ NETLIFY (Adaptado) -->
-<form
-  name="quiz-paternidad"
-  method="POST"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
-  action="/gracias" <!-- ESTO ES LO CLAVE: Redirige a la página interna /gracias -->
-  class="space-y-6 bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-lg border-t-4 border-indigo-500"
->
-    <!-- Campo oculto requerido por Netlify para evitar bots (Honeypot) -->
-    <p class="hidden">
-        <label>No me llenes: <input name="bot-field" /></label>
-    </p>
-    
-    <!-- Campo oculto OBLIGATORIO: Nombre del formulario para Netlify -->
-    <input type="hidden" name="form-name" value="quiz-paternidad" />
-    
-    <h2 class="text-2xl font-bold text-gray-800 text-center">Descubre tu Estilo de Paternidad</h2>
-    <p class="text-sm text-gray-500 text-center">Responde 3 preguntas y accede a la página de inscripción.</p>
+    <div class="w-full max-w-md bg-white shadow-xl rounded-xl p-8 md:p-10 border-t-8 border-indigo-600 text-center">
+        
+        <div class="text-indigo-600 mb-4">
+            <!-- Icono de cheque (SVG) -->
+            <svg class="mx-auto h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
 
-    <!-- 1. CAMPOS DE LEADS -->
-    <div class="space-y-4">
-        <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
-            <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                placeholder="Tu nombre" 
-                required 
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            />
-        </div>
-        <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-            <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                placeholder="ejemplo@correo.com" 
-                required 
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            />
-        </div>
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">
+            ¡Formulario Recibido!
+        </h1>
+        <p class="text-gray-600 mb-6">
+            Estás siendo redirigido automáticamente a la página de inscripción y pago.
+        </p>
+        
+        <!-- Mensaje de respaldo por si la redirección es lenta o bloqueada -->
+        <p class="text-sm text-indigo-500 mb-4">
+            Si no eres redirigido, haz clic en el siguiente botón:
+        </p>
+
+        <a id="redirect-button" 
+           href="https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr"
+           class="inline-flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+            Ir a la Página de Pago
+        </a>
     </div>
 
-    <!-- 2. PREGUNTA 1: CONEXIÓN Y REACTIVIDAD -->
-    <fieldset class="pt-4 border-t border-gray-200">
-        <legend class="text-base font-semibold text-gray-900 mb-2">1. Cuando tu hijo/a tiene una rabieta fuerte o está muy frustrado, ¿cuál es tu reacción más común?</legend>
-        <div class="space-y-2">
-            <div class="flex items-start">
-                <input id="q1_a" name="q1_reaccion" type="radio" value="Reaccion_A" required class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                <label for="q1_a" class="ml-3 text-sm text-gray-700">Reacciono gritando o castigando para que se detenga de inmediato.</label>
-            </div>
-            <div class="flex items-start">
-                <input id="q1_b" name="q1_reaccion" type="radio" value="Reaccion_B" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                <label for="q1_b" class="ml-3 text-sm text-gray-700">Intento razonar o distraerlo, pero termino frustrado/a esperando que se le pase.</label>
-            </div>
-            <div class="flex items-start">
-                <input id="q1_c" name="q1_reaccion" type="radio" value="Reaccion_C" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                <label for="q1_c" class="ml-3 text-sm text-gray-700">Respiro, valido su emoción ("Entiendo que estás enojado") y luego establezco el límite.</label>
-            </div>
-        </div>
-    </fieldset>
-
-    <!-- 3. PREGUNTA 2: CALIDAD DE LA CONEXIÓN -->
-    <fieldset class="pt-4 border-t border-gray-200">
-        <legend class="text-base font-semibold text-gray-900 mb-2">2. ¿Qué tan a menudo sientes que estás en modo 'presencia plena' (sin prisa ni celular) con tu hijo/a?</legend>
-        <div class="space-y-2">
-            <div class="flex items-start">
-                <input id="q2_a" name="q2_presencia_plena" type="radio" value="Conexion_A" required class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                <label for="q2_a" class="ml-3 text-sm text-gray-700">Rara vez; siento que estamos en modo 'supervivencia' o solo dando órdenes.</label>
-            </div>
-            <div class="flex items-start">
-                <input id="q2_b" name="q2_presencia_plena" type="radio" value="Conexion_B" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                <label for="q2_b" class="ml-3 text-sm text-gray-700">Hacemos cosas juntos, pero mi mente a menudo está en las tareas pendientes.</label>
-            </div>
-            <div class="flex items-start">
-                <input id="q2_c" name="q2_presencia_plena" type="radio" value="Conexion_C" class="mt-1 h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                <label for="q2_c" class="ml-3 text-sm text-gray-700">Diariamente tenemos rituales de conexión genuina donde el mundo exterior desaparece.</label>
-            </div>
-        </div>
-    </fieldset>
-
-    <!-- 4. PREGUNTA 3: EL MODELO DEL ADULTO (CHECKBOX) -->
-    <fieldset class="pt-4 border-t border-gray-200">
-        <legend class="text-base font-semibold text-gray-900 mb-2">3. ¿Cuál de estas afirmaciones describe mejor cómo manejas *tu propia frustración o estrés* frente a tu hijo/a? (Marca todas las que apliquen)</legend>
-        <div class="space-y-2">
-            <!-- Nota: Usamos [] en el nombre para que Netlify capture múltiples valores como un array. -->
-            <div class="flex items-start">
-                <input id="q3_a" name="q3_modelaje[]" type="checkbox" value="Modelaje_A" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                <label for="q3_a" class="ml-3 text-sm text-gray-700">Muestro mi enfado sin filtro; necesitan ver la realidad.</label>
-            </div>
-            <div class="flex items-start">
-                <input id="q3_b" name="q3_modelaje[]" type="checkbox" value="Modelaje_B" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                <label for="q3_b" class="ml-3 text-sm text-gray-700">Me retiro para calmarme y luego vuelvo a hablar de lo que sentí.</label>
-            </div>
-            <div class="flex items-start">
-                <input id="q3_c" name="q3_modelaje[]" type="checkbox" value="Modelaje_C" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                <label for="q3_c" class="ml-3 text-sm text-gray-700">Pido disculpas de forma auténtica cuando me doy cuenta de que reaccioné mal.</label>
-            </div>
-            <div class="flex items-start">
-                <input id="q3_d" name="q3_modelaje[]" type="checkbox" value="Modelaje_D" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                <label for="q3_d" class="ml-3 text-sm text-gray-700">Trato de ocultar o reprimir mis emociones para no preocuparlos.</label>
-            </div>
-        </div>
-    </fieldset>
-
-    <!-- 5. BOTÓN DE ENVÍO -->
-    <button 
-        type="submit" 
-        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
-    >
-        ¡Descubre el Camino y Accede al Taller!
-    </button>
-</form>
-<!-- FIN DEL FORMULARIO DE CAPTURA DE LEADS Y QUIZ NETLIFY -->
+    <script>
+        // METODO 2 (JavaScript): Redirección de respaldo inmediata
+        const redirectUrl = "https://sites.google.com/paternidadaarr.com/inscripcionypago/taller-el-despertar-de-la-paternidad-y-maternidad-aarr";
+        // Esta línea asegura que la redirección sea prácticamente instantánea si el meta tag falla o es bloqueado.
+        window.onload = function() {
+             setTimeout(function() {
+                window.location.href = redirectUrl;
+             }, 100); // 100ms de retraso para asegurar que Netlify registre el envío antes de la redirección.
+        };
+        
+        // Mensaje de depuración que indica la URL de destino
+        document.body.insertAdjacentHTML('beforeend', 
+            `<div class="debug-message">
+                Esta página redirigirá a: ${redirectUrl}
+            </div>`
+        );
+    </script>
 
 </body>
 </html>
